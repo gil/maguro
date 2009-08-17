@@ -1,8 +1,2 @@
-*.classpath
-*.project
-*.settings
-*.class
 *.DS_Store
-.settings/
-target/
 bin/
