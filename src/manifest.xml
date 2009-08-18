@@ -2,5 +2,6 @@
 <componentPackage>
 
     <component id="ColorPasswordField" class="maguro.controls.ColorPasswordField" />
+    <component id="TitledFrame" class="maguro.containers.TitledFrame" />
     
 </componentPackage>
