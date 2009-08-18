@@ -32,6 +32,10 @@ package maguro.containers
 
 	[DefaultProperty("contentContainer")]
 
+	[Exclude(name="borderStyle", kind = "style")]
+	[Exclude(name="borderSides", kind = "style")]
+	[Exclude(name="borderSkin", kind = "style")]
+
 	/**
 	 * Draw a border around the container and a title label.
 	 */
