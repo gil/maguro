@@ -24,22 +24,15 @@ package maguro.containers
 {
 	import mx.controls.Label;
 	import mx.core.Container;
-	import mx.core.ContainerLayout;
-	import mx.core.LayoutContainer;
 	import mx.events.FlexEvent;
-	import mx.skins.halo.HaloBorder;
 	import mx.utils.StringUtil;
 
 	[DefaultProperty("contentContainer")]
 
-	[Exclude(name="borderStyle",kind="style")]
-	[Exclude(name="borderSides",kind="style")]
-	[Exclude(name="borderSkin",kind="style")]
-
 	/**
 	 * Draw a border around the container and a title label.
 	 */
-	public class TitledFrame extends LayoutContainer
+	public class TitledFrame extends Container
 	{
 
 		//--------------------------------------------------------------------------
@@ -54,9 +47,6 @@ package maguro.containers
 		public function TitledFrame()
 		{
 			super();
-
-			super.layout = ContainerLayout.ABSOLUTE;
-
 		}
 
 		//--------------------------------------------------------------------------
@@ -137,6 +127,11 @@ package maguro.containers
 		/**
 		 * @private
 		 */
+		private var _oldContentContainer:Container;
+
+		/**
+		 * @private
+		 */
 		private var _contentContainer:Container;
 
 		/**
@@ -152,14 +147,8 @@ package maguro.containers
 		 */
 		public function set contentContainer(value:Container):void
 		{
-			if (_contentContainer != null)
-			{
-				// Remove old content container
-				this.removeChild(_contentContainer);
-			}
-
+			_oldContentContainer = _contentContainer;
 			_contentContainer = value;
-
 			_contentContainerChanged = true;
 			invalidateProperties();
 		}
@@ -194,49 +183,61 @@ package maguro.containers
 		{
 			super.updateDisplayList(unscaledWidth, unscaledHeight);
 
-			var textHeight:int = _titleLabel.height / 2;
-			var bakckgroundColor:uint = this.getStyle("backgroundColor") == null ? 0xFFFFFF : this.getStyle("backgroundColor");
+			var _textHeight:int = 0;
+			var _midTextHeight:int = 0;
 
-			with (_titleLabel)
+			// Configure the label
+			if (_titleLabel != null)
 			{
-				// Set the title label properties
-				x = TITLE_LABEL_PADDING;
-				y = 0;
-				maxWidth = this.width - (TITLE_LABEL_PADDING * 2);
-				truncateToFit = true;
-				visible = _showTitleLabel;
+				var _maxWidth:int = this.width - (TITLE_LABEL_PADDING * 2);
 
-				// Draw a rect to make the label not transparent
-				graphics.clear();
-				graphics.beginFill(bakckgroundColor);
-				graphics.drawRect(-1, 0, _titleLabel.width, _titleLabel.height);
+				_textHeight = _titleLabel.textHeight;
+				_midTextHeight = _textHeight / 2;
+
+				with (_titleLabel)
+				{
+					x = TITLE_LABEL_PADDING;
+					y = 0;
+
+					width = Math.min(_titleLabel.textWidth + TITLE_LABEL_PADDING, _maxWidth);
+					height = _textHeight + 2;
+
+					truncateToFit = true;
+					visible = _showTitleLabel;
+				}
 			}
 
+			// Draw the border
+			with (this.graphics)
+			{
+				clear();
+				beginFill(0x000000);
+
+				// First border
+				drawRect(0, _midTextHeight, this.width, this.height - _midTextHeight);
+
+				// Remove the diference
+				drawRect(1, _midTextHeight + 1, this.width - 2, this.height - _midTextHeight - 2);
+
+				if (_titleLabel != null && _showTitleLabel)
+				{
+					// Remove the text space from border
+					drawRect(TITLE_LABEL_PADDING - 1, _midTextHeight, _titleLabel.width, 1);
+				}
+			}
+
+			// Set the content container position and size
 			if (_contentContainer != null)
 			{
 				with (_contentContainer)
 				{
-					// Set the content container position
-					setStyle("top", 0);
-					setStyle("left", 0);
-					setStyle("right", 0);
-					setStyle("bottom", 0);
-
-					move(0, _titleLabel.height);
-					height -= _titleLabel.height;
+					x = TITLE_LABEL_PADDING;
+					y = _textHeight + TITLE_LABEL_PADDING;
+					width = this.width - (TITLE_LABEL_PADDING * 2);
+					height = this.height - _textHeight - (TITLE_LABEL_PADDING * 2);
 				}
 			}
 
-			// Force the component border
-			this.setStyle("borderStyle", "solid");
-
-			// Move the border correctly
-			var _border:HaloBorder = (rawChildren.getChildByName("border") as HaloBorder);
-			if (_border != null)
-			{
-				_border.move(0, textHeight);
-				_border.height = this.height - textHeight;
-			}
 		}
 
 		/**
@@ -267,6 +268,12 @@ package maguro.containers
 			if (_contentContainerChanged)
 			{
 				_contentContainerChanged = false;
+
+				// Remove the old content container, if necessary
+				if (_oldContentContainer != null)
+				{
+					this.removeChild(_oldContentContainer);
+				}
 
 				// Add new the content container
 				this.addChild(_contentContainer);
