@@ -32,9 +32,9 @@ package maguro.containers
 
 	[DefaultProperty("contentContainer")]
 
-	[Exclude(name="borderStyle", kind = "style")]
-	[Exclude(name="borderSides", kind = "style")]
-	[Exclude(name="borderSkin", kind = "style")]
+	[Exclude(name="borderStyle",kind="style")]
+	[Exclude(name="borderSides",kind="style")]
+	[Exclude(name="borderSkin",kind="style")]
 
 	/**
 	 * Draw a border around the container and a title label.
@@ -197,28 +197,34 @@ package maguro.containers
 			var textHeight:int = _titleLabel.height / 2;
 			var bakckgroundColor:uint = this.getStyle("backgroundColor") == null ? 0xFFFFFF : this.getStyle("backgroundColor");
 
-			// Set the title label properties
-			_titleLabel.x = TITLE_LABEL_PADDING;
-			_titleLabel.y = 0;
-			_titleLabel.maxWidth = this.width - (TITLE_LABEL_PADDING * 2);
-			_titleLabel.truncateToFit = true;
-			_titleLabel.visible = _showTitleLabel;
+			with (_titleLabel)
+			{
+				// Set the title label properties
+				x = TITLE_LABEL_PADDING;
+				y = 0;
+				maxWidth = this.width - (TITLE_LABEL_PADDING * 2);
+				truncateToFit = true;
+				visible = _showTitleLabel;
 
-			// Draw a rect to make the label not transparent
-			_titleLabel.graphics.clear();
-			_titleLabel.graphics.beginFill(bakckgroundColor);
-			_titleLabel.graphics.drawRect(-1, 0, _titleLabel.width, _titleLabel.height);
+				// Draw a rect to make the label not transparent
+				graphics.clear();
+				graphics.beginFill(bakckgroundColor);
+				graphics.drawRect(-1, 0, _titleLabel.width, _titleLabel.height);
+			}
 
 			if (_contentContainer != null)
 			{
-				// Set the content container position
-				_contentContainer.setStyle("top", 0);
-				_contentContainer.setStyle("left", 0);
-				_contentContainer.setStyle("right", 0);
-				_contentContainer.setStyle("bottom", 0);
+				with (_contentContainer)
+				{
+					// Set the content container position
+					setStyle("top", 0);
+					setStyle("left", 0);
+					setStyle("right", 0);
+					setStyle("bottom", 0);
 
-				_contentContainer.move(0, _titleLabel.height);
-				_contentContainer.height -= _titleLabel.height;
+					move(0, _titleLabel.height);
+					height -= _titleLabel.height;
+				}
 			}
 
 			// Force the component border

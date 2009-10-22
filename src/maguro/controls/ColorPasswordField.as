@@ -34,6 +34,8 @@ package maguro.controls
 	import mx.effects.AnimateProperty;
 	import mx.events.EffectEvent;
 
+	[Exclude(name="displayAsPassword", kind="property")]
+
 	/**
 	 * Password field that shows color bars to help checking if the typed password is correct.
 	 *
