@@ -24,6 +24,7 @@ package maguro.containers
 {
 	import mx.controls.Label;
 	import mx.core.Container;
+	import mx.core.UIComponent;
 	import mx.events.FlexEvent;
 	import mx.utils.StringUtil;
 
@@ -32,7 +33,7 @@ package maguro.containers
 	/**
 	 * Draw a border around the container and a title label.
 	 */
-	public class TitledFrame extends Container
+	public class TitledFrame extends UIComponent
 	{
 
 		//--------------------------------------------------------------------------
@@ -47,6 +48,7 @@ package maguro.containers
 		public function TitledFrame()
 		{
 			super();
+			this.tabChildren = true;
 		}
 
 		//--------------------------------------------------------------------------
