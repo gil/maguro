@@ -1,8 +1,12 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <flexLibProperties version="1">
-  <includeClasses/>
-  <includeResources/>
-  <namespaceManifests>
-    <namespaceManifestEntry manifest="manifest.xml" namespace="http://github.com/gil/maguro/"/>
-  </namespaceManifests>
+<includeClasses>
+<classEntry path="maguro.form.fields.FieldDateField"/>
+<classEntry path="maguro.form.fields.FieldComboBox"/>
+<classEntry path="maguro.form.FormController"/>
+</includeClasses>
+<includeResources/>
+<namespaceManifests>
+<namespaceManifestEntry manifest="manifest.xml" namespace="http://github.com/gil/maguro/"/>
+</namespaceManifests>
 </flexLibProperties>
