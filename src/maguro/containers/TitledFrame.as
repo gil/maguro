@@ -28,6 +28,16 @@ package maguro.containers
 	import mx.events.FlexEvent;
 	import mx.utils.StringUtil;
 
+	/**
+	 * Style to controle the frame border color.
+	 */
+	[Style(name="frameColor",type="uint",format="Color",inherit="yes")]
+
+	/**
+	 * Style to controle the frame title text color.
+	 */
+	[Style(name="titleColor",type="uint",format="Color",inherit="yes")]
+
 	[DefaultProperty("contentContainer")]
 
 	/**
@@ -188,6 +198,12 @@ package maguro.containers
 			var _textHeight:int = 0;
 			var _midTextHeight:int = 0;
 
+			var titleColor:uint = 0x000000;
+			if (getStyle("titleColor"))
+			{
+				titleColor = getStyle("titleColor");
+			}
+
 			// Configure the label
 			if (_titleLabel != null)
 			{
@@ -206,14 +222,22 @@ package maguro.containers
 
 					truncateToFit = true;
 					visible = _showTitleLabel;
+
+					setStyle("color", titleColor);
 				}
+			}
+
+			var borderColor:uint = 0x000000;
+			if (getStyle("frameColor"))
+			{
+				borderColor = getStyle("frameColor");
 			}
 
 			// Draw the border
 			with (this.graphics)
 			{
 				clear();
-				beginFill(0x000000);
+				beginFill(borderColor);
 
 				// First border
 				drawRect(0, _midTextHeight, this.width, this.height - _midTextHeight);
