@@ -56,11 +56,11 @@ package maguro.hash
 		/**
 		 * Generate the CRC-8 for the value.
 		 */
-		public static function getCRC8(value:String):Number
+		public static function getCRC8(value:String):uint
 		{
-			var crc:Number = 0;
+			var crc:uint = 0;
 
-			for (var i:int = 0; i < value.length; i++)
+			for (var i:uint = 0; i < value.length; i++)
 			{
 				crc = CRC8Table[(crc ^ value.charCodeAt(i)) & 0xFF];
 			}
@@ -92,11 +92,11 @@ package maguro.hash
 		/**
 		 * Generate the CRC-16 ARC for the value.
 		 */
-		public static function getCRC16ARC(value:String):Number
+		public static function getCRC16ARC(value:String):uint
 		{
-			var crc:Number = 0;
+			var crc:uint = 0;
 
-			for (var i:int = 0; i < value.length; i++)
+			for (var i:uint = 0; i < value.length; i++)
 			{
 				crc = CRC16ARCTable[(crc ^ value.charCodeAt(i)) & 0xFF] ^ ((crc >> 8) & 0xFF);
 			}
@@ -128,11 +128,11 @@ package maguro.hash
 		/**
 		 * Generate the CRC-16 for the value.
 		 */
-		public static function getCRC16(value:String):Number
+		public static function getCRC16(value:String):uint
 		{
-			var crc:Number = 0;
+			var crc:uint = 0;
 
-			for (var i:int = 0; i < value.length; i++)
+			for (var i:uint = 0; i < value.length; i++)
 			{
 				crc = CRC16Table[((crc >> 8) ^ value.charCodeAt(i)) & 0xFF] ^ ((crc << 8) & 0xFFFF);
 			}
@@ -164,11 +164,11 @@ package maguro.hash
 		/**
 		 * Generate the FCS-16 for the value.
 		 */
-		public static function getFCS16(value:String):Number
+		public static function getFCS16(value:String):uint
 		{
-			var fcs:Number = 0xFFFF;
+			var fcs:uint = 0xFFFF;
 
-			for (var i:int = 0; i < value.length; i++)
+			for (var i:uint = 0; i < value.length; i++)
 			{
 				fcs = FCS16Table[(fcs ^ value.charCodeAt(i)) & 0xFF] ^ ((fcs >> 8) & 0xFF);
 			}
@@ -210,16 +210,16 @@ package maguro.hash
 		/**
 		 * Generate the CRC-32 for the value.
 		 */
-		public static function getCRC32(value:String):Number
+		public static function getCRC32(value:String):uint
 		{
-			var crc:Number = 0xFFFFFFFF;
+			var crc:uint = 0xFFFFFFFF;
 
-			for (var i:int = 0; i < value.length; i++)
+			for (var i:uint = 0; i < value.length; i++)
 			{
 				crc = CRC32Table[(crc ^ value.charCodeAt(i)) & 0xFF] ^ ((crc >> 8) & 0xFFFFFF);
 			}
 
-			return uint(crc ^ 0xFFFFFFFF);
+			return crc ^ 0xFFFFFFFF;
 		}
 
 	}
