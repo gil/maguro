@@ -1,9 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <flexLibProperties version="1">
 <includeClasses>
-<classEntry path="maguro.form.fields.FieldDateField"/>
-<classEntry path="maguro.form.fields.FieldComboBox"/>
+<classEntry path="maguro.containers.TitledFrame"/>
+<classEntry path="maguro.controls.ColorPasswordField"/>
+<classEntry path="maguro.form.FieldHandler"/>
 <classEntry path="maguro.form.FormController"/>
+<classEntry path="maguro.form.fields.FieldComboBox"/>
+<classEntry path="maguro.form.fields.FieldDateField"/>
+<classEntry path="maguro.form.fields.FieldTextInput"/>
+<classEntry path="maguro.form.interfaces.IFormField"/>
+<classEntry path="maguro.hash.CRC"/>
+<classEntry path="maguro.hash.MD5"/>
+<classEntry path="maguro.utils.IntUtil"/>
 </includeClasses>
 <includeResources/>
 <namespaceManifests>

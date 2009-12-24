@@ -30,7 +30,7 @@
    SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-package maguro.crypto
+package maguro.hash
 {
 
 	import flash.utils.ByteArray;

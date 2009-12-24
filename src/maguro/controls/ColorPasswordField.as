@@ -27,14 +27,14 @@ package maguro.controls
 	import flash.events.TimerEvent;
 	import flash.utils.Timer;
 
-	import maguro.crypto.MD5;
+	import maguro.hash.MD5;
 
 	import mx.collections.ArrayCollection;
 	import mx.controls.TextInput;
 	import mx.effects.AnimateProperty;
 	import mx.events.EffectEvent;
 
-	[Exclude(name="displayAsPassword", kind="property")]
+	[Exclude(name="displayAsPassword",kind="property")]
 
 	/**
 	 * Password field that shows color bars to help checking if the typed password is correct.
