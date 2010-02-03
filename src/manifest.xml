@@ -4,11 +4,7 @@
     <component id="ColorPasswordField" class="maguro.controls.ColorPasswordField" />
     <component id="TitledFrame" class="maguro.containers.TitledFrame" />
     
-    <component id="FormController" class="maguro.form.FormController" />
-    <component id="FieldHandler" class="maguro.form.FieldHandler" />
-    
-    <component id="FieldTextInput" class="maguro.form.fields.FieldTextInput" />
-    <component id="FieldDateField" class="maguro.form.fields.FieldDateField" />
-    <component id="FieldComboBox" class="maguro.form.fields.FieldComboBox" />
+    <component id="CRC" class="maguro.hash.CRC" />
+    <component id="MD5" class="maguro.hash.MD5" />
     
 </componentPackage>
